@@ -4,16 +4,13 @@
 
 package io.github.jiayaoO3O.entity.miaomiao;
 
-import io.github.jiayaoO3O.entity.BaseEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * Created by jiayao on 2021/10/26.
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class RegionEntity extends BaseEntity {
+public class RegionEntity {
     private String name;
     private String value;
 }

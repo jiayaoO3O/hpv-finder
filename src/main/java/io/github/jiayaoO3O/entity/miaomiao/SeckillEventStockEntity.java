@@ -10,13 +10,7 @@ import lombok.Data;
  * Created by jiayao on 2021/10/26.
  */
 @Data
-public class SeckillEventEntity {
-    private Integer id;
-    private String name;
-    private String imgUrl;
-    private String vaccineCode;
-    private String vaccineName;
-    private String address;
-    private String startTime;
+public class SeckillEventStockEntity {
     private Integer stock;
+    private Long st;
 }
