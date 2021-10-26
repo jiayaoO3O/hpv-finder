@@ -4,8 +4,44 @@
 
 package io.github.jiayaoO3O.service;
 
+import io.github.jiayaoO3O.response.*;
+import io.smallrye.mutiny.Uni;
+import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
 /**
  * Created by jiayao on 2021/10/26.
  */
+@RegisterRestClient
+@Produces(MediaType.APPLICATION_JSON)
+@ClientHeaderParam(name = "Host", value = "${miaomiao.header.host}")
+@ClientHeaderParam(name = "User-Agent", value = "${miaomiao.header.user-agent}")
+@ClientHeaderParam(name = "Referer", value = "${miaomiao.header.referer}")
 public interface MiaomiaoService {
+    @GET
+    @Path("/base/region/childRegions.do")
+    Uni<RegionResponseEntity> getRegion(@QueryParam("parentCode") Integer parentCode);
+
+    @GET
+    @Path("/seckill/seckill/list.do")
+    Uni<SeckillEventResponseEntity> getSeckillEvent(@QueryParam("regionCode") Integer regionCode);
+
+    @GET
+    @Path("/seckill/seckill/now2.do")
+    Uni<SeckillServerTimeResponseEntity> getServerTime();
+
+    @GET
+    @Path("/seckill/seckill/checkstock2.do?id={id}")
+    @ClientHeaderParam(name = "Cookie", value = "${server.info.cookie}")
+    @ClientHeaderParam(name = "tk", value = "${server.info.tk}")
+    Uni<SeckillEventStockResponseEntity> getVaccineStock(@PathParam("id") Integer id);
+
+    @GET
+    @Path("seckill/linkman/findByUserId.do")
+    @ClientHeaderParam(name = "Cookie", value = "${server.info.cookie}")
+    @ClientHeaderParam(name = "tk", value = "${server.info.tk}")
+    Uni<SeckillUserResponseEntity> getUser();
 }

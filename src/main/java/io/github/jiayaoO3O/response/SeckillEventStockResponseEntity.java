@@ -8,12 +8,14 @@ import io.github.jiayaoO3O.entity.BaseResponseEntity;
 import io.github.jiayaoO3O.entity.miaomiao.SeckillEventStockEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Created by jiayao on 2021/10/26.
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@ToString(callSuper = true)
 public class SeckillEventStockResponseEntity extends BaseResponseEntity {
     private SeckillEventStockEntity data;
 }

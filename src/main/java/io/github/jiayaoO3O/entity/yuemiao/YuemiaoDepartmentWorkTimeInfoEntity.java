@@ -7,6 +7,7 @@ package io.github.jiayaoO3O.entity.yuemiao;
 import io.github.jiayaoO3O.entity.BaseResponseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@ToString(callSuper = true)
 public class YuemiaoDepartmentWorkTimeInfoEntity extends BaseResponseEntity {
     private List<YuemiaoDepartmentWorkTimeDetailEntity> data;
 }

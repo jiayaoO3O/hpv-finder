@@ -7,13 +7,17 @@ package io.github.jiayaoO3O.response;
 import io.github.jiayaoO3O.entity.BaseResponseEntity;
 import io.github.jiayaoO3O.entity.miaomiao.SeckillEventEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.List;
 
 /**
  * Created by jiayao on 2021/10/26.
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
+@ToString(callSuper = true)
 public class SeckillEventResponseEntity extends BaseResponseEntity {
     private List<SeckillEventEntity> data;
 }

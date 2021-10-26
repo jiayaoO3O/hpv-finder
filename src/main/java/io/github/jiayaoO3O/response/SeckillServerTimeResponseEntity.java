@@ -4,12 +4,17 @@
 
 package io.github.jiayaoO3O.response;
 
+import io.github.jiayaoO3O.entity.BaseResponseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Created by jiayao on 2021/10/26.
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class SeckillServerTimeResponseEntity {
+@ToString(callSuper = true)
+public class SeckillServerTimeResponseEntity extends BaseResponseEntity {
     private Long data;
 }
