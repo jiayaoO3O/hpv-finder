@@ -10,8 +10,9 @@ import lombok.Data;
  * Created by jiayao on 2021/10/26.
  */
 @Data
-public abstract class BaseEntity {
+public abstract class BaseResponseEntity {
     private String code;
     private Boolean ok;
     private Boolean notOk;
+    private String msg;
 }
