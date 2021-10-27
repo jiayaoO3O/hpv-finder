@@ -4,7 +4,7 @@
 
 package io.github.jiayaoO3O.entity.yuemiao;
 
-import io.github.jiayaoO3O.entity.BaseResponseEntity;
+import io.github.jiayaoO3O.response.BaseResponseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
