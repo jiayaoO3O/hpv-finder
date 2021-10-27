@@ -9,7 +9,10 @@ import io.smallrye.mutiny.Uni;
 import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -34,10 +37,10 @@ public interface MiaomiaoService {
     Uni<SeckillServerTimeResponseEntity> getServerTime();
 
     @GET
-    @Path("/seckill/seckill/checkstock2.do?id={eventId}")
+    @Path("/seckill/seckill/checkstock2.do")
     @ClientHeaderParam(name = "Cookie", value = "${server.info.cookie}")
     @ClientHeaderParam(name = "tk", value = "${server.info.tk}")
-    Uni<SeckillEventStockResponseEntity> getVaccineStock(@PathParam("eventId") Integer eventId);
+    Uni<SeckillEventStockResponseEntity> getVaccineStock(@QueryParam("id") Integer eventId);
 
     @GET
     @Path("seckill/linkman/findByUserId.do")
