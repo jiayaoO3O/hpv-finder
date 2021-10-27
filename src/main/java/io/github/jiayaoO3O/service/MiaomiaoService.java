@@ -34,10 +34,10 @@ public interface MiaomiaoService {
     Uni<SeckillServerTimeResponseEntity> getServerTime();
 
     @GET
-    @Path("/seckill/seckill/checkstock2.do?id={id}")
+    @Path("/seckill/seckill/checkstock2.do?id={eventId}")
     @ClientHeaderParam(name = "Cookie", value = "${server.info.cookie}")
     @ClientHeaderParam(name = "tk", value = "${server.info.tk}")
-    Uni<SeckillEventStockResponseEntity> getVaccineStock(@PathParam("id") Integer id);
+    Uni<SeckillEventStockResponseEntity> getVaccineStock(@PathParam("eventId") Integer eventId);
 
     @GET
     @Path("seckill/linkman/findByUserId.do")
