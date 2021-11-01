@@ -26,7 +26,7 @@ import javax.ws.rs.core.MediaType;
 public interface MiaomiaoService {
     @GET
     @Path("/base/region/childRegions.do")
-    Uni<RegionResponseEntity> getRegion(@QueryParam("parentCode") Integer parentCode);
+    Uni<RegionResponseEntity> getRegion(@QueryParam("parentCode") Integer regionCode);
 
     @GET
     @Path("/seckill/seckill/list.do")

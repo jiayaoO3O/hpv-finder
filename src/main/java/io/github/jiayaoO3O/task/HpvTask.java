@@ -4,19 +4,26 @@
 
 package io.github.jiayaoO3O.task;
 
-import cn.hutool.log.Log;
+import io.github.jiayaoO3O.service.HpvService;
 import io.quarkus.scheduler.Scheduled;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  * Created by jiayao on 2021/10/25.
  */
 @ApplicationScoped
+@Slf4j
 public class HpvTask {
-    private static final Log log = Log.get();
-    @Scheduled(every = "1s")
-    public void check(){
-        log.info("hello world");
+    @Inject
+    HpvService hpvService;
+
+    @Scheduled(every = "1m")
+    public void check() {
+        hpvService.querySeckillEventsByRegionCode(1201)
+                .subscribe()
+                .with(seckillEventEntities -> log.info(seckillEventEntities.toString()));
     }
 }

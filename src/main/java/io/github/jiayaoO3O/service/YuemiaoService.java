@@ -41,7 +41,7 @@ public interface YuemiaoService {
     @ClientHeaderParam(name = "Cookie", value = "${server.info.cookie}")
     @ClientHeaderParam(name = "tk", value = "${server.info.tk}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    Uni<YuemiaoDepartmentResponseEntity> getDepartment(@FormParam("regionCode") String regionCode, @FormParam("customId") String catalogId);
+    Uni<YuemiaoDepartmentResponseEntity> getDepartment(@FormParam("regionCode") String regionCode, @FormParam("customId") String catalogId, @QueryParam("limit") Integer limit);
 
     @GET
     @Path("/base/departmentVaccine/item.do")
