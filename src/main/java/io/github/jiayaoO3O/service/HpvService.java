@@ -6,9 +6,7 @@ package io.github.jiayaoO3O.service;
 
 import io.github.jiayaoO3O.entity.miaomiao.SeckillEventEntity;
 import io.github.jiayaoO3O.entity.miaomiao.SeckillUserEntity;
-import io.github.jiayaoO3O.entity.yuemiao.YuemiaoCatalogCustomEntity;
-import io.github.jiayaoO3O.entity.yuemiao.YuemiaoCatalogEntity;
-import io.github.jiayaoO3O.entity.yuemiao.YuemiaoDepartmentDetailEntity;
+import io.github.jiayaoO3O.entity.yuemiao.*;
 import io.smallrye.mutiny.Uni;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -89,7 +87,7 @@ public class HpvService {
     }
 
     public Uni<List<YuemiaoDepartmentDetailEntity>> queryDepartments(String regionCode, String customerId) {
-        return yuemiaoService.getDepartment(regionCode, customerId, 1)//先查询一i套
+        return yuemiaoService.getDepartment(regionCode, customerId, 1)//先查询一条
                 .chain(totalResponseEntity -> {
                     if(totalResponseEntity.getNotOk() && !totalResponseEntity.getOk()) {
                         log.error("获取疫苗目录详情失败->[{}][{}]", totalResponseEntity.getCode(), totalResponseEntity.getMsg());
@@ -100,6 +98,84 @@ public class HpvService {
                 .chain(responseEntity -> Uni.createFrom()
                         .item(responseEntity.getData()
                                 .getRows()));
+    }
+
+    public Uni<YuemiaoSubscribeInfoEntity> querySubscription(Integer depaVaccId, String departmentCode, Integer vaccineCode, Integer linkmanId) {
+        return yuemiaoService.getSubscribe(depaVaccId, departmentCode, vaccineCode, linkmanId)
+                .chain(responseEntity -> {
+                    if(responseEntity.getNotOk() && !responseEntity.getOk()) {
+                        log.error("获取该服务站能否预约失败->[{}][{}]", responseEntity.getCode(), responseEntity.getMsg());
+                    }
+                    return Uni.createFrom()
+                            .item(responseEntity.getData());
+                });
+    }
+
+    public Uni<Integer> querySubscriptionCount(Integer depaVaccId) {
+        return yuemiaoService.getSubscribeCount(depaVaccId)
+                .chain(responseEntity -> {
+                    if(responseEntity.getNotOk() && !responseEntity.getOk()) {
+                        log.error("获取已预约人数失败->[{}][{}]", responseEntity.getCode(), responseEntity.getMsg());
+                    }
+                    return Uni.createFrom()
+                            .item(responseEntity.getData());
+                });
+    }
+
+    public Uni<Integer> querySbuscriptioneAllowed(Integer depaVaccId, Integer linkmanId) {
+        return yuemiaoService.getSubscribeAllowed(depaVaccId, linkmanId)
+                .chain(responseEntity -> {
+                    if(responseEntity.getNotOk() && !responseEntity.getOk()) {
+                        log.error("获取预约权限失败->[{}][{}]", responseEntity.getCode(), responseEntity.getMsg());
+                    }
+                    return Uni.createFrom()
+                            .item(responseEntity.getData());
+                });
+    }
+
+    public Uni<YuemiaoDepartmentWorkDayInfoEntity> queryWorkDay(Integer depaVaccId, String departmentCode, Integer vaccineCode, Integer vaccIndex, Integer linkmanId, String month) {
+        return yuemiaoService.getWorkDay(depaVaccId, departmentCode, vaccineCode, vaccIndex, linkmanId, month)
+                .chain(responseEntity -> {
+                    if(responseEntity.getNotOk() && !responseEntity.getOk()) {
+                        log.error("获取预约接种日期失败->[{}][{}]", responseEntity.getCode(), responseEntity.getMsg());
+                    }
+                    return Uni.createFrom()
+                            .item(responseEntity.getData());
+                });
+    }
+
+    public Uni<List<YuemiaoDepartmentVaccineAvailableAmountEntity>> queryAvailableVaccineAmount(Integer depaVaccId, String departmentCode, Integer vaccineCode, Integer vaccIndex, String days) {
+        return yuemiaoService.getAvailableVaccineAmount(depaVaccId, departmentCode, vaccineCode, vaccIndex, days)
+                .chain(responseEntity -> {
+                    if(responseEntity.getNotOk() && !responseEntity.getOk()) {
+                        log.error("获取当天可接种数目失败->[{}][{}]", responseEntity.getCode(), responseEntity.getMsg());
+                    }
+                    return Uni.createFrom()
+                            .item(responseEntity.getData());
+                });
+    }
+
+    public Uni<List<YuemiaoDepartmentWorkTimeDetailEntity>> queryWorkTime(Integer depaVaccId, String departmentCode, Integer vaccCode, Integer vaccIndex, String subscribeDate, Integer linkmanId, String idCardNo) {
+        return yuemiaoService.getWorkTime(depaVaccId, departmentCode, vaccCode, vaccIndex, subscribeDate, linkmanId, idCardNo)
+                .chain(responseEntity -> {
+                    if(responseEntity.getNotOk() && !responseEntity.getOk()) {
+                        log.error("获取预约接种时间失败->[{}][{}]", responseEntity.getCode(), responseEntity.getMsg());
+                    }
+                    return Uni.createFrom()
+                            .item(responseEntity.getData()
+                                    .getData());
+                });
+    }
+
+    public Uni<String> order(Integer depaVaccId, String depaCode, Integer vaccCode, Integer vaccIndex, String subscribeDate, Integer subscribeTime, Integer linkmanId, Integer serviceFee, String ticket) {
+        return yuemiaoService.order(depaVaccId, depaCode, vaccCode, vaccIndex, subscribeDate, subscribeTime, linkmanId, serviceFee, ticket)
+                .chain(responseEntity -> {
+                    if(responseEntity.getNotOk() && !responseEntity.getOk()) {
+                        log.error("预约失败->[{}][{}]", responseEntity.getCode(), responseEntity.getMsg());
+                    }
+                    return Uni.createFrom()
+                            .item(responseEntity.getData());
+                });
     }
 
 }

@@ -83,12 +83,12 @@ public interface YuemiaoService {
     @Path("/subscribe/subscribe/departmentWorkTimes2.do")
     @ClientHeaderParam(name = "Cookie", value = "${server.info.cookie}")
     @ClientHeaderParam(name = "tk", value = "${server.info.tk}")
-    Uni<YuemiaoDepartmentWorkTimeInfoResponseEntity> getWorkTime(@QueryParam("departmentVaccineId") Integer depaVaccId, @QueryParam("depaCode") String depaCode, @QueryParam("vaccCode") Integer vaccCode, @QueryParam("vaccIndex") Integer vaccIndex, @QueryParam("subsribeDate") String subsribeDate, @QueryParam("linkmanId") Integer linkmanId, @QueryParam("idCardNo") String idCardNo);
+    Uni<YuemiaoDepartmentWorkTimeInfoResponseEntity> getWorkTime(@QueryParam("departmentVaccineId") Integer depaVaccId, @QueryParam("depaCode") String depaCode, @QueryParam("vaccCode") Integer vaccCode, @QueryParam("vaccIndex") Integer vaccIndex, @QueryParam("subsribeDate") String subscribeDate, @QueryParam("linkmanId") Integer linkmanId, @QueryParam("idCardNo") String idCardNo);
 
     @GET
     @Path("/subscribe/subscribe/add.do")
     @ClientHeaderParam(name = "Cookie", value = "${server.info.cookie}")
     @ClientHeaderParam(name = "tk", value = "${server.info.tk}")
-    Uni<YuemiaoOrderResponseEntity> order(@QueryParam("departmentVaccineId") Integer depaVaccId, @QueryParam("depaCode") String depaCode, @QueryParam("vaccineCode") Integer vaccCode, @QueryParam("vaccineIndex") Integer vaccIndex, @QueryParam("subscribeDate") String subscribeDate, @QueryParam("linkmanId") Integer linkmanId, @QueryParam("subscirbeTime") Integer subscirbeTime, @QueryParam("serviceFee") Integer serviceFee, @QueryParam("ticket") String ticket);
+    Uni<YuemiaoOrderResponseEntity> order(@QueryParam("departmentVaccineId") Integer depaVaccId, @QueryParam("depaCode") String depaCode, @QueryParam("vaccineCode") Integer vaccCode, @QueryParam("vaccineIndex") Integer vaccIndex, @QueryParam("subscribeDate") String subscribeDate, @QueryParam("subscirbeTime") Integer subscribeTime, @QueryParam("linkmanId") Integer linkmanId, @QueryParam("serviceFee") Integer serviceFee, @QueryParam("ticket") String ticket);
 
 }
